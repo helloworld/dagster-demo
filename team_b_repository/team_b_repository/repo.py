@@ -1,8 +1,8 @@
 from dagster import repository
 
-from .pipelines import my_pipeline
+from .pipelines import my_other_pipeline
 
 
 @repository
 def my_repository():
-    return [my_pipeline]
+    return [my_other_pipeline]

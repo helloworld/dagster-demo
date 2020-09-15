@@ -5,6 +5,7 @@ services:
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
     dockerfilePath: ./dagit/Dockerfile
+    dockerContext: ./dagit
     dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard
@@ -16,6 +17,7 @@ services:
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
     dockerfilePath: ./team_a_repository/Dockerfile
+    dockerContext: ./team_a_repository
     dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard
@@ -26,6 +28,7 @@ services:
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
     dockerfilePath: ./team_b_repository/Dockerfile
+    dockerContext: ./team_b_repository
     dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard

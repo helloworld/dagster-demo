@@ -15,7 +15,7 @@ RUN mkdir -p /opt/dagster/app
 WORKDIR /opt/dagster/app
 
 # Install requirements
-COPY requirements.txt .
+COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .

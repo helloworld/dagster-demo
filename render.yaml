@@ -10,6 +10,17 @@ services:
     plan: standard
     branch: master
     healthCheckPath: /dagit_info
+    envVars:
+      - key: GRPC_HOST
+        fromService:
+          name: grpc
+          type: pserv
+          property: host # available properties are listed below
+      - key: GRPC_PORT
+        fromService:
+          name: grpc
+          type: pserv
+          property: port
 
   - type: pserv
     name: grpc

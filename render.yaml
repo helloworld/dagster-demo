@@ -1,0 +1,10 @@
+services:
+  # A Docker web service for Dagit
+  - type: web
+    name: dagit
+    env: docker
+    repo: https://github.com/helloworld/dagster-demo # optional
+    region: oregon
+    plan: standard
+    branch: master
+    healthCheckPath: /dagit_info

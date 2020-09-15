@@ -3,5 +3,5 @@ load_from:
       package_name: dagster_demo.repo
   - grpc_server:
       host: grpc
-      port: 100000
+      port: 4266
       location_name: "my_grpc_server"

@@ -5,26 +5,22 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
 
-# Install and setup poetry
+# Install and setup pip
 RUN pip install -U pip \
-    && apt-get update \
-    && apt install -y curl netcat \
-    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-ENV PATH="${PATH}:/root/.poetry/bin"
+    && apt-get update
 
 # Create DAGSTER_HOME and folder for code
 RUN mkdir -p /opt/dagster/dagster_home /opt/dagster/app
-
-# Cache poetry files
 WORKDIR /opt/dagster/app
-COPY poetry.lock pyproject.toml /opt/dagster/app/
-RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi
+
+# Install requirements
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 COPY . .
-RUN chmod +x entrypoint.sh
+RUN pip install -e dagster_demo
 
 EXPOSE 3000
 
-# run entrypoint.sh
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/opt/dagster/app/entrypoint.sh"]

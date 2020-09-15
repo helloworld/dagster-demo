@@ -1,5 +1,7 @@
 FROM python:3.7-slim
 
+RUN pip install dagster dagit
+
 RUN mkdir -p /opt/dagster/dagster_home /opt/dagster/app
 
 # Copy your code and entrypoint.sh to /opt/dagster/app

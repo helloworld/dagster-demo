@@ -1,7 +1,0 @@
-load_from:
-  - python_package:
-      package_name: dagster_demo.repo
-  - grpc_server:
-      host: grpc
-      port: 4266
-      location_name: "my_grpc_server"

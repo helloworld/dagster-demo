@@ -1,0 +1,5 @@
+load_from:
+  - grpc_server:
+      host: team_a_repository_grpc
+      port: 4266
+      location_name: "team_a_repository_grpc"

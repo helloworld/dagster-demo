@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="dagster_demo",  # Replace with your own username
+    name="team_a_repository",  # Replace with your own username
     version="0.0.1",
     author="Example Author",
     author_email="s@thupukari.com",

@@ -4,30 +4,29 @@ services:
     name: dagit
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./dagit/Dockerfile
     dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard
     branch: master
     healthCheckPath: /dagit_info
-    envVars:
-      - key: GRPC_HOST
-        fromService:
-          name: grpc
-          type: pserv
-          property: host # available properties are listed below
-      - key: GRPC_PORT
-        fromService:
-          name: grpc
-          type: pserv
-          property: port
 
   - type: pserv
-    name: grpc
+    name: team_a_repository_grpc
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
-    dockerfilePath: ./Dockerfile
-    dockerCommand: ./grpc_entrypoint.sh
+    dockerfilePath: ./team_a_repository/Dockerfile
+    dockerCommand: ./entrypoint.sh
+    region: oregon
+    plan: standard
+    branch: master
+
+  - type: pserv
+    name: team_b_repository_grpc
+    env: docker
+    repo: https://github.com/helloworld/dagster-demo # optional
+    dockerfilePath: ./team_b_repository/Dockerfile
+    dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard
     branch: master

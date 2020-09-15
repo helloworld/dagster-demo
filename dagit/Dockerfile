@@ -18,8 +18,7 @@ WORKDIR /opt/dagster/app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . .
-RUN pip install -e dagster_demo
+COPY dagster.yaml /opt/dagster/dagster_home
+COPY workspace.yaml entrypoint.sh /opt/dagster/app/
 
 RUN chmod +x entrypoint.sh
-RUN chmod +x grpc_entrypoint.sh

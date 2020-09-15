@@ -31,4 +31,3 @@ services:
     region: oregon
     plan: standard
     branch: master
-    healthCheckPath: /dagit_info

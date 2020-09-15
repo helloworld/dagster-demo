@@ -24,3 +24,4 @@ RUN pip install -e dagster_demo
 EXPOSE 3000
 
 RUN chmod +x entrypoint.sh
+RUN chmod +x grpc_entrypoint.sh

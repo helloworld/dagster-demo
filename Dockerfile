@@ -11,6 +11,7 @@ RUN pip install -U pip \
 
 # Create DAGSTER_HOME and folder for code
 RUN mkdir -p /opt/dagster/dagster_home /opt/dagster/app
+
 WORKDIR /opt/dagster/app
 
 # Install requirements
@@ -23,4 +24,3 @@ RUN pip install -e dagster_demo
 EXPOSE 3000
 
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["/opt/dagster/app/entrypoint.sh"]

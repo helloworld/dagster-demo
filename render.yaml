@@ -5,6 +5,7 @@ services:
     env: docker
     repo: https://github.com/helloworld/dagster-demo # optional
     dockerfilePath: ./Dockerfile
+    dockerCommand: ./entrypoint.sh
     region: oregon
     plan: standard
     branch: master

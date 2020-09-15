@@ -10,3 +10,14 @@ services:
     plan: standard
     branch: master
     healthCheckPath: /dagit_info
+
+  - type: pserv
+    name: grpc
+    env: docker
+    repo: https://github.com/helloworld/dagster-demo # optional
+    dockerfilePath: ./Dockerfile
+    dockerCommand: ./grpc_entrypoint.sh
+    region: oregon
+    plan: standard
+    branch: master
+    healthCheckPath: /dagit_info

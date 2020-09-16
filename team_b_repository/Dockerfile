@@ -21,4 +21,6 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN pip install -e .
 
+EXPOSE 4266
+
 RUN chmod +x entrypoint.sh

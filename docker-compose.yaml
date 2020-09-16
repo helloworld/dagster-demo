@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  dagit:
+    build:
+      context: ./dagit
+      dockerfile: Dockerfile
+    entrypoint: ./entrypoint.sh
+    networks:
+      dagster:
+    depends_on:
+      - team-a-repository-grpc
+      - team-b-repository-grpc
+      - dagster_db
+    ports:
+      - "3000:3000"
+    environment:
+      - DAGSTER_PG_USERNAME=test
+      - DAGSTER_PG_PASSWORD=test
+      - DAGSTER_PG_DB=test
+      - DAGSTER_PG_HOST=dagster_db
+      - DAGSTER_PG_PORT=5432
+
+  team-a-repository-grpc:
+    build:
+      context: ./team_a_repository
+      dockerfile: Dockerfile
+    entrypoint: ./entrypoint.sh
+    networks:
+      dagster:
+
+  team-b-repository-grpc:
+    build:
+      context: ./team_b_repository
+      dockerfile: Dockerfile
+    entrypoint: ./entrypoint.sh
+    networks:
+      dagster:
+
+  dagster_db:
+    image: postgres:11
+    container_name: dagster_db
+    ports:
+      - "5432:5432"
+    networks:
+      dagster:
+    environment:
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_USER: "test"
+      POSTGRES_DB: "test"
+
+networks:
+  dagster:
+    driver: bridge

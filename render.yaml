@@ -99,3 +99,6 @@ services:
 
 databases:
   - name: dagster_db
+    region: frankfurt
+    plan: standard
+    ipAllowList: [] # only allow internal connections

@@ -127,6 +127,50 @@ services:
           type: pserv
           property: port
 
+  # A Docker web service for Dagit
+  - type: worker
+    name: celery_workers
+    env: docker
+    numInstances: 3
+    repo: https://github.com/helloworld/dagster-demo # optional
+    dockerfilePath: ./dagit/Dockerfile.celery
+    dockerContext: ./dagit
+    dockerCommand: ./celery_entrypoint.sh
+    region: oregon
+    plan: standard
+    branch: master
+    envVars:
+      - key: DAGSTER_PG_USERNAME
+        fromDatabase:
+          name: dagster_db
+          property: user
+      - key: DAGSTER_PG_PASSWORD
+        fromDatabase:
+          name: dagster_db
+          property: password
+      - key: DAGSTER_PG_HOST
+        fromDatabase:
+          name: dagster_db
+          property: host
+      - key: DAGSTER_PG_PORT
+        fromDatabase:
+          name: dagster_db
+          property: port
+      - key: DAGSTER_PG_DB
+        fromDatabase:
+          name: dagster_db
+          property: database
+      - key: REDIS_HOST
+        fromService:
+          name: redis
+          type: pserv
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: redis
+          type: pserv
+          property: port
+
   - type: pserv
     name: redis
     env: docker

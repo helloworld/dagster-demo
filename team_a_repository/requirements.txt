@@ -1,3 +1,4 @@
 dagster
 dagster_postgres
 dagster_cron
+dagster_celery

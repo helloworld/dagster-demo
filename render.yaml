@@ -32,6 +32,16 @@ services:
         fromDatabase:
           name: dagster_db
           property: database
+      - key: REDIS_HOST
+        fromService:
+          name: redis
+          type: pserv
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: redis
+          type: pserv
+          property: port
 
   - type: pserv
     name: team_a_repository_grpc
@@ -64,6 +74,16 @@ services:
         fromDatabase:
           name: dagster_db
           property: database
+      - key: REDIS_HOST
+        fromService:
+          name: redis
+          type: pserv
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: redis
+          type: pserv
+          property: port
 
   - type: pserv
     name: team_b_repository_grpc
@@ -96,9 +116,47 @@ services:
         fromDatabase:
           name: dagster_db
           property: database
+      - key: REDIS_HOST
+        fromService:
+          name: redis
+          type: pserv
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: redis
+          type: pserv
+          property: port
+
+  - type: pserv
+    name: redis
+    env: docker
+    repo: https://github.com/render-examples/redis.git # optional
+    envVars:
+      - key: GENERATED_SECRET
+        generateValue: true # will generate a base64-encoded 256-bit secret
+      - key: DASHBOARD_SECRET
+        sync: false # placeholder for a value to be added in the dashboard
+    disk:
+      name: redis-data
+      mountPath: /var/lib/redis
+      sizeGB: 10 # optional
+
+  - type: web
+    name: flower
+    env: python
+    repo: https://github.com/render-examples/celery # optional
+    region: oregon
+    plan: standard
+    branch: master
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery flower -A tasks -l info
+    healthCheckPath: /
+    envVars:
+      - key: CELERY_BROKER_URL
+        value: redis:10000
 
 databases:
   - name: dagster_db
-    region: frankfurt
+    region: oregon
     plan: standard
     ipAllowList: [] # only allow internal connections

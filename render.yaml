@@ -43,6 +43,27 @@ services:
     region: oregon
     plan: standard
     branch: master
+    envVars:
+      - key: DAGSTER_PG_USERNAME
+        fromDatabase:
+          name: dagster_db
+          property: user
+      - key: DAGSTER_PG_PASSWORD
+        fromDatabase:
+          name: dagster_db
+          property: password
+      - key: DAGSTER_PG_HOST
+        fromDatabase:
+          name: dagster_db
+          property: host
+      - key: DAGSTER_PG_PORT
+        fromDatabase:
+          name: dagster_db
+          property: port
+      - key: DAGSTER_PG_DB
+        fromDatabase:
+          name: dagster_db
+          property: database
 
   - type: pserv
     name: team_b_repository_grpc
@@ -54,6 +75,27 @@ services:
     region: oregon
     plan: standard
     branch: master
+    envVars:
+      - key: DAGSTER_PG_USERNAME
+        fromDatabase:
+          name: dagster_db
+          property: user
+      - key: DAGSTER_PG_PASSWORD
+        fromDatabase:
+          name: dagster_db
+          property: password
+      - key: DAGSTER_PG_HOST
+        fromDatabase:
+          name: dagster_db
+          property: host
+      - key: DAGSTER_PG_PORT
+        fromDatabase:
+          name: dagster_db
+          property: port
+      - key: DAGSTER_PG_DB
+        fromDatabase:
+          name: dagster_db
+          property: database
 
 databases:
   - name: dagster_db
